@@ -1,3 +1,3 @@
 {
-  "rewrites":[{"src":"/(.*)", "dest":"/bin/"}]
+  "rewrites":[{"source":"/(.*)", "destination":"/bin/"}]
 }
