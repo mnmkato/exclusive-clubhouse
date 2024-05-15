@@ -8,8 +8,12 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <% if (user) {%>
-      <h1>WELCOME BACK <%= user.username %></h1>
+      <h1>Hello <%= user.username %></h1>
       <a href="/log-out">LOG OUT</a>
+      <form action="/new" method="post">
+        <input type="text" name="message" id="message" placeholder="Write a message..">
+        <input type="submit" value="Post">
+      </form>
     <% } else { %>
       <h1>please log in</h1>
       <form action="/log-in" method="POST">
@@ -21,5 +25,20 @@
       </form>
       <p>Don't have an account?<a href="/sign-up">register</a></p>
     <%}%>
+    <% messages.forEach((message) => { %>
+      <div>
+          <p><%= message.created_at %></p>
+          <% if (user) {%>
+            <p><%= message.author.username %></p>
+          <% } %>
+          <p><%= message.text %></p>
+          <% if (user && user._id.toString() === message.author._id.toString()) {%>
+            <form action="/delete_message" method="POST">
+              <input type="hidden" name="message_id" value="<%= message._id %>">
+              <input type="submit" value="Delete">
+            </form>
+          <% } %>
+      </div>
+    <% }) %>
   </body>
 </html>
