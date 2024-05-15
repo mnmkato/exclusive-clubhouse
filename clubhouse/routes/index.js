@@ -3,7 +3,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs")
 const User = require('../models/user')
 const Message = require('../models/message')
-
+const validator = require('validator');
 var router = express.Router();
 
 /* GET home page. */
@@ -21,32 +21,51 @@ router.get("/sign-up", (req, res) => res.render("sign-up", {title: "clubhouse" }
 
 /* POST sign up page form */
 router.post("/sign-up", async (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+    const firstName = req.body.first_name.trim();
+    const lastName = req.body.last_name.trim();
+    const username = req.body.username.trim();
+    const password = req.body.password.trim();
+    const confirmPassword = req.body.confirm_password.trim();
+    
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        return res.status(400).json({ error: "Passwords do not match" });
+    }
+
+    // Validate email
+    if (!validator.isEmail(username)) {
+        return res.status(400).json({ error: "Invalid email address" });
+    }
+
+  bcrypt.hash(password, 10, async (err, hashedPassword) => {
     // if err, do something
     if(err){consoole.log(err)}
 
     // otherwise, store hashedPassword in DB
     try {
       const user = new User({
-        username: req.body.username,
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
         password: hashedPassword
       });
+      
       const result = await user.save();
       res.redirect("/");
     } catch(err) {
       return next(err);
     };
   });
-  });
+});
 
 /* POST log in page form */
 router.post(
     "/log-in",
     passport.authenticate("local", {
       successRedirect: "/",
-      failureRedirect: "/"
+      failureRedirect: "/sign-up"
     })
-  );
+);
 
 /* GET log out */
 router.get("/log-out", (req, res, next) => {
