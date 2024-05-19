@@ -16,8 +16,11 @@ router.get("/", async (req, res) => {
   });
 }); 
 
+/* GET login page. */
+router.get("/log-in", (req, res) => res.render("log-in", {title: "Clubhouse" }));
+
 /* GET sign up page. */
-router.get("/sign-up", (req, res) => res.render("sign-up", {title: "clubhouse" }));
+router.get("/sign-up", (req, res) => res.render("sign-up", {title: "Clubhouse" }));
 
 /* POST sign up page form */
 router.post("/sign-up", async (req, res, next) => {

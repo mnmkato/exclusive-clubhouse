@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="title-div">
+        <a href="/"><h1><%= title %></h1></a>
+    </div>
+    <div class="form-div">
+        <h1>Please log in</h1>
+        <form action="/log-in" method="POST">
+          <label for="username">Email</label>
+          <input name="username" placeholder="Email" type="email" />
+          <label for="password">Password</label>
+          <input name="password" type="password" />
+          <button class="log-in-button">Log In</button>
+        </form>
+      <p>Don't have an account? <a class="register-link" href="/sign-up">Register</a></p>
+      </div>
+  </body>
+</html>

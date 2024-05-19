@@ -1,8 +1,142 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #161616;
+  color: #bdbdbd;
+}
+.title-div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+a {
+  text-decoration: none;
+  color:#bdbdbd;
+}
+.greeting{
+  font-size: 18px;
+}
+.title-button{
+  margin-left: 1rem;
+  padding: 10px; 
+  background-color: #637074;
+  color: #f1f3f3;
+  font-size: 16px;
+  cursor: pointer;
+}
+.hero{
+  text-align: center;
+}
+.new-message-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.new-message-form{
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+.new-message-form> input{
+  border: none;
+  border-radius: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: #333;
+  box-sizing: border-box;
+  width: 100%;
+}
+.new-message-form> .post-message-button{
+  border: none;
+  border-radius: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px; 
+  background-color: #637074;
+  color: #f1f3f3;
+  width: 150px;
+}
+.message-grid{
+  background-color: #161616;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );;
+}
+.message-div{
+  background-color: #383838;
+  color: #c2c2c2;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+}
+.message-date,.message-author{
+  color: #7f7f7f;
+}
+.message-date{
+  text-align: right;
+  margin: 0;
+}
+/* sign up and log in styling */
+.form-div{ 
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #383838;
 }
 
-a {
-  color: #00B7FF;
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.log-in-button{
+  background-color: #637074;
+  color: #f1f3f3;
+}
+.log-in-button:hover{
+  background-color: #555e61;
+}
+button:hover {
+  background-color: #218838;
+}
+.register-link{
+  color: rgb(113, 113, 248);
+}
+
+/* For mobile phones */
+@media  only screen and (max-width: 480px){
+  .form-div {
+    width: 100%;
+  }
 }

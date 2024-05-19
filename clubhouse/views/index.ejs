@@ -5,40 +5,45 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <% if (user) {%>
-      <h1>Hello <%= user.first_name %></h1>
-      <a href="/log-out">LOG OUT</a>
-      <form action="/new" method="post">
-        <input type="text" name="message" id="message" placeholder="Write a message..">
-        <input type="submit" value="Post">
-      </form>
-    <% } else { %>
-      <h1>please log in</h1>
-      <form action="/log-in" method="POST">
-        <label for="username">Email</label>
-        <input name="username" placeholder="Email" type="email" />
-        <label for="password">Password</label>
-        <input name="password" type="password" />
-        <button>Log In</button>
-      </form>
-      <p>Don't have an account?<a href="/sign-up">register</a></p>
-    <%}%>
-    <% messages.forEach((message) => { %>
+    <div class="title-div">
+      <a href="/"><h1><%= title %></h1></a>
       <div>
-          <% if (user) {%>
-            <p><%= message.created_at_formatted %></p>
-            <p><%= message.author.fullName %></p>
-          <% } %>
-          <p><%= message.text %></p>
-          <% if (user && user._id.toString() === message.author._id.toString()) {%>
-            <form action="/delete_message" method="POST">
-              <input type="hidden" name="message_id" value="<%= message._id %>">
-              <input type="submit" value="Delete">
-            </form>
-          <% } %>
+        <% if (user) {%>
+          <span class="greeting">Hello <%= user.firstName || "User" %></span>
+          <a class="title-button" href="/log-out">Log Out</a>
+        <% } else { %>
+          <a class="title-button" href="/log-in">Log In</a>
+          <a class="title-button" href="/sign-up">Sign Up</a>
+        <%}%>
       </div>
-    <% }) %>
+    </div>
+    <p class="hero">Welcome to <%= title %></p>
+    <% if (user) {%>
+      <div class="new-message-div">
+        <form class="new-message-form" action="/new" method="post">
+          <input type="text" name="message" id="message" placeholder="Write a message..">
+          <input class="post-message-button" type="submit" value="Post">
+        </form>
+      </div>
+    <% } %>
+    <div class="message-grid">
+      <% messages.forEach((message) => { %>
+        <div class="message-div">
+          <% if (user) {%>
+            <p class="message-date"><%= message.created_at_formatted %></p>
+          <% } %>
+          <p class="message-text"><%= message.text %></p>
+            <% if (user) {%>
+              <p class="message-author"><%= message.author.fullName %></p>
+            <% } %>
+            <% if (user && user._id.toString() === message.author._id.toString()) {%>
+              <form action="/delete_message" method="POST">
+                <input type="hidden" name="message_id" value="<%= message._id %>">
+                <input type="submit" value="Delete">
+              </form>
+            <% } %>
+        </div>
+      <% }) %>
+    </div>
   </body>
 </html>
