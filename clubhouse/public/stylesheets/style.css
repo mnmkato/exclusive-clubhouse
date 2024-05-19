@@ -139,6 +139,13 @@ button:hover {
 
 /* For mobile phones */
 @media  only screen and (max-width: 480px){
+  body{
+    padding: 1rem;
+  }
+  .title-button{
+    margin-left: 0;
+    margin-right: 1rem;
+  }
   .title-div{
     flex-direction: column;
     align-items: flex-start;
@@ -150,6 +157,6 @@ button:hover {
     width: 100%;
   }
   .form-div {
-    width: 100%;
+    width: auto;
   }
 }
